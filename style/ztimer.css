@@ -1,0 +1,508 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+:root {
+    /* פלטת צבעים חמה, טבעית ויוקרתית */
+    --warm-cream: #faf8f0;       /* רקע בהיר וחם */
+    --warm-dark: #435441;        /* חום אדמה כהה לטקסט */
+    --warm-gold: #150b026d;       /* זהב מט עדין */
+    --warm-overlay: rgba(62, 43, 29, 0.85); /* שכבה כהה חצי שקופה חמה */
+    --soft-shadow: 0 15px 40px rgba(62, 43, 29, 0.1);
+    --transition-soft: all 0.4s ease-out;
+}
+
+body {
+    font-family: 'Assistant', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--warm-dark);
+    direction: rtl;
+    background: var(--warm-cream);
+    overflow-x: hidden;
+}
+
+/* אנימציית כניסה עדינה כללית */
+@keyframes fadeInUpSoft {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== ניווט כללי ===== */
+.hero-nav {
+  display: flex;
+  align-items: center;             /* מיישר אנכית את הלוגו והתפריט */
+  justify-content: space-between;  /* שומר על המרחק בין הלוגו לתפריט */
+  padding: 10px 20px;
+  
+}
+
+/* ===== לוגו ===== */
+.hero-logo img {
+  max-width: 100px; /* הגודל נשאר קטן */
+  height: auto;
+  opacity: 0.95;
+}
+
+/* ===== תפריט ===== */
+.hero-menu {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-menu li {
+  position: relative;
+}
+
+/* ===== כרטיסיית הצימרים – גרסה עדינה ===== */
+.dropdown-card {
+  position: absolute;
+  top: 120%;
+  right: 0;
+
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 10px;
+  min-width: 170px;
+
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 100;
+}
+
+/* פתיחה */
+.dropdown:hover .dropdown-card,
+.dropdown:focus-within .dropdown-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* קישורים בתוך הכרטיסיה */
+.dropdown-card a {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--warm-dark);
+  text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-card a:hover {
+  background: rgba(0,0,0,0.04);
+  color: var(--warm-gold);
+}
+
+/* ===== הגדרות נוספות של הלוגו לשימוש ביתי ===== */
+.home-logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.home-logo img {
+  max-width: 180px;
+  width: 100%;
+  opacity: 0.95;
+}
+.hero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+
+  /* רקע חצי שקוף */
+  background-color: rgba(0, 0, 0, 0.5); /* שחור עם שקיפות 50% */
+}
+
+
+
+/* ===== מעטפת ראשית ===== */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* רקע תמונה חם ועדין */
+    background: url('../תמונות\ כלליות/TL-Fall10-1532.webp') no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+/* שכבת ריכוך על רקע התמונה */
+.page-wrapper::before {
+    content: '';
+    position: fixed; /* נשאר קבוע גם כשגוללים */
+    inset: 0;      
+    z-index: 0;       
+    background: rgba(0, 0, 0, 0.423); 
+    backdrop-filter: blur(8px); 
+}
+
+/* ===== כרטיס הצימר הראשי (עם האלכסון) ===== */
+.zimmer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    height: 550px;
+    background: var(--warm-cream);
+    box-shadow: var(--soft-shadow);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 40px;
+    /* אנימציית כניסה חד פעמית עדינה */
+    animation: fadeInUpSoft 1s ease-out forwards;
+}
+
+/* צד ימין - גלריה */
+.zimmer-gallery {
+    width: 55%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(8px); 
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    /* אנימציית תמונות איטית מאוד ועדינה */
+    animation: slowFade 20s infinite linear;
+}
+
+@keyframes slowFade {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    25% { opacity: 1; }
+    30% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.s1 { animation-delay: 0s; }
+.s2 { animation-delay: 4s; }
+.s3 { animation-delay: 8s; }
+.s4 { animation-delay: 12s; }
+.s5 { animation-delay: 16s; }
+
+/* צד שמאל - מידע (עם האלכסון החוזר) */
+.zimmer-info {
+    width: 45%;
+    background: var(--warm-dark); /* רקע כהה וחם לחלק של הטקסט */
+    color: var(--warm-cream);
+     /* טקסט בהיר */
+    
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 50px;
+    z-index: 2;
+}
+
+/* יצירת האלכסון */
+.zimmer-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -60px; /* מיקום החיתוך */
+    width: 120px;
+    height: 100%;
+    background: var(--warm-dark);
+    transform: skewX(-8deg); /* זווית האלכסון */
+    z-index: -1;
+}
+
+.info-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--warm-gold);
+    margin: 0 0 10px 0;
+}
+
+.slogan {
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 25px;
+    display: block;
+    font-weight: 300;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.info-grid strong { color: var(--warm-gold); }
+
+.description {
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 35px;
+    font-weight: 300;
+}
+
+/* כפתורים (ללא אנימציות מוגזמות) */
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-soft);
+    cursor: pointer;
+    font-size: 1rem;
+    border: none;
+}
+
+.book-btn {
+    background: var(--warm-gold);
+    color: var(--warm-dark);
+    
+}
+
+.book-btn:hover {
+    transform: translateY(-2px); /* תזוזה מינימלית */
+}
+
+.contact-btn {
+    color: var(--warm-cream);
+    border: 1px solid var(--warm-cream);
+}
+
+.contact-btn:hover {
+    background: rgba(250, 248, 240, 0.1);
+}
+
+
+/* ===== אזור המלצות חדש ===== */
+.reviews-section {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 1100px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--warm-dark);
+    margin-bottom: 40px;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.review-card {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.418),
+    rgba(0, 0, 0, 0.421)
+  );   
+   padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--soft-shadow);
+    text-align: right;
+    border-top: 3px solid var(--warm-gold);
+    /* אנימציית כניסה עדינה לכרטיסים */
+    opacity: 0;
+    animation: fadeInUpSoft 0.8s ease-out forwards;
+}
+
+/* דיליי קטן לכל כרטיס לכניסה מדורגת */
+.review-card:nth-child(1) { animation-delay: 0.2s; }
+.review-card:nth-child(2) { animation-delay: 0.4s; }
+.review-card:nth-child(3) { animation-delay: 0.6s; }
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--warm-gold);
+    color: var(--warm-cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.reviewer-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.review-text {
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--warm-cream);
+}
+
+
+/* ===== מודאל ומפה ===== */
+/* (הקוד הקודם של המודאל והמפה נשאר זהה, רק הותאם לצבעים החדשים) */
+.modal-booking {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(62, 43, 29, 0.7); /* רקע חום כהה שקוף */
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+#toggle-booking:checked ~ .modal-booking { display: flex; }
+
+.modal-content {
+    background: var(--warm-cream);
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: var(--soft-shadow);
+}
+
+.modal-content h2 { color: var(--warm-dark); font-family: 'Playfair Display', serif; }
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    font-family: 'Assistant', sans-serif;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 12px;
+    background: var(--warm-dark);
+    color: var(--warm-gold);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.modal-content button:hover { background: #2a1d13; }
+
+.close-label { float: left; cursor: pointer; font-size: 24px; color: var(--warm-dark); }
+
+/* אזור מפה */
+.map-section {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 1100px;
+    margin-top: 60px;
+      background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.221),
+    rgba(0, 0, 0, 0.282)
+  );   
+     padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--soft-shadow);
+    text-align: center;
+}
+.map-container {
+    width: 100%; height: 400px; border-radius: 15px; overflow: hidden; margin-top: 20px;
+}
+.map-container iframe { width: 100%; height: 100%; border: 0; filter: sepia(0.2); }
+
+/* התאמה לנייד */
+@media (max-width: 900px) {
+    .hero-nav { padding: 15px; } .hero-menu { display: none; }
+    .zimmer { flex-direction: column; height: auto; }
+    .zimmer-gallery { width: 100%; height: 250px; }
+    .zimmer-info { width: 100%; padding: 30px; }
+    .zimmer-info::before { display: none; } /* ביטול האלכסון בנייד */
+    .reviews-grid { grid-template-columns: 1fr; 
+    
+    }
+}
+
+    /* ===== סFOOTER=====*/
+.site-footer {
+    width: 100%;
+        background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.221),
+        rgba(0, 0, 0, 0.282)
+    );   backdrop-filter: blur(6px); /* אפקט “hero” עדין */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    }
+
+    .footer-line {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1); /* קו דק לאורך כל הדף */
+    padding-top: 10px;
+    }
+
+    .footer-logo img {
+    max-width: 80px;
+    height: auto;
+    opacity: 0.95;
+    }
+
+    .footer-text {
+    font-size: 0.85rem;
+    color: #ffffff;
+    text-align: right;
+    }
+
+    @media (max-width: 900px) {
+    .footer-line {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-text {
+        text-align: center;
+    }
+    }
+       
+

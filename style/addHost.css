@@ -1,0 +1,132 @@
+.add-resort-page {
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    padding: 20px; /* padding סביב כל הדף */
+    padding-right: 0px;
+}
+
+.background-blur {
+    background: url('../תמונות כלליות/beautiful-pool-blue-to-apple-green-koshibo-ombre-fabric.webp') center/cover no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(8px) brightness(0.6);
+    z-index: -1;
+}
+
+/* ===== פריסה אופקית ===== */
+.top-section {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* רווח גדול יותר בין הסקשנים */
+    padding: 80px 20px; /* יותר padding מעל ומתחת */
+    flex-wrap: wrap;
+}
+
+/* סקשן הסבר */
+.intro-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px; /* הקטנה של הסקשן הסבר */
+    height: fit-content;
+    background-color: rgba(0,0,0,0.45);
+    padding: 35px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+/* סקשן טופס */
+.form-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px; /* הקטנה של הטופס */
+    background-color: rgba(255,255,255,0.95);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #5f8f75;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-btn {
+    background-color: #5f8f75;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #8fb8a3;
+}
+
+/* ===== איך נוכל לעזור ===== */
+.help-section {
+    background-color: rgba(0,0,0,0.45);
+    color: white;
+    text-align: center;
+    padding: 60px 25px;
+    margin: 80px auto 40px; /* רווח גדול יותר בין הסקשן לטופס */
+    width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.help-section a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* רספונסיבי */
+@media (max-width: 900px) {
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .intro-container, .form-container {
+        max-width: 90%;
+        margin-bottom: 30px; /* רווח בין הסקשנים במובייל */
+    }
+    .help-section {
+        width: 90%;
+    }
+}

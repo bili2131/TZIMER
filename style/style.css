@@ -1,0 +1,400 @@
+/* ===== משתני בסיס ===== */
+:root {
+  --bg-light: #f7f8f6;
+  --green-soft: #8fb8a3;
+  --green-dark: #5f8f75;
+  --text-dark: #2e2e2e;
+  --overlay: rgba(0,0,0,0.45);
+  --shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  
+  font-family: 'Arial', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ===== HERO ===== */
+.hero-screen {
+  min-height: 100vh;
+  /* background: url("./1760950608941.jpg") center / cover no-repeat; */
+  position: relative;
+  overflow: hidden;
+  
+}
+
+.hero-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.4),
+    rgba(0,0,0,0.1)
+  );
+}
+
+.hero-nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  color: white;
+}
+
+.hero-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.hero-menu a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.hero-menu a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.4s;
+}
+
+.hero-menu a:hover::after {
+  width: 100%;
+}
+.zimmer-info a {
+  position: relative;
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+}
+
+.zimmer-info a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.zimmer-info a:hover::after {
+  width: 100%;
+}
+
+.card-overlay a {
+  position: relative;
+  text-decoration: none;
+  color: white; /* הצבע של הקו והטקסט */
+  display: inline-block;
+}
+
+.card-overlay a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: white; /* צבע הקו */
+  transition: width 0.3s ease;
+}
+
+.card-overlay a:hover::after {
+  width: 100%;
+}
+
+.hero-content {
+  position: absolute;
+  inset: 65;
+  background: var(--overlay);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  bottom: 30px;
+  width: 100%;
+
+  /* אנימציה בטעינה */
+  animation: heroFadeUp 1s ease-out forwards;
+ 
+}
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px); /* מגיע מלמטה */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* נעצר ב-bottom:30px */
+  }
+}
+
+
+#imgTitle
+{
+    width: 100%;
+    height: 100vh;
+    background-image: url('../תמונות\ כלליות/תמונה מסך הבית.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* יוצר אפקט שהתמונה נשארת במקום כשגוללים */
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.hero-content p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  background-color: #e3ece3;
+ 
+}
+.section-title {
+  text-align: center;
+
+  background: var(--overlay);
+  color: white;
+
+
+  align-items: center;
+
+  bottom: 30px;
+  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+}
+
+/* ===== GRID של תמונות (צימרים) ===== */
+.image-grid {
+  display: flex;
+  gap: 30px;
+  overflow: hidden;
+
+  
+
+}
+
+.image-card {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slideUp 2s forwards;
+  border-radius: 10px;
+}
+
+.image-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.image-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.image-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.1);
+}
+
+/* ===== OVERLAY שמופיע מהצד ===== */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  color: white;
+  display: flex;
+  flex-direction: column;
+      flex-wrap: wrap;
+
+  justify-content: center;
+  padding: 30px;
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+}
+
+.image-card:hover .card-overlay {
+  transform: translateX(0);
+}
+
+
+/* 3. אפקט המיקוד (Zoom) במעבר עכבר */
+.image-card:hover img {
+    transform: scale(1.08); /* מגדיל את התמונה ב-15% */
+}
+
+
+/* ===== אזור טקסט ===== */
+.area-section {
+  background: white;
+}
+
+.area-content {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  animation: fadeUp 1s ease-out;
+}
+
+
+/* ===== אנימציות ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* ===== סFOOTER=====*/
+
+.site-footer {
+  width: 100%;
+      background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.221),
+    rgba(0, 0, 0, 0.282)
+  );   backdrop-filter: blur(6px); /* אפקט “hero” עדין */
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+}
+
+.footer-line {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid rgba(0,0,0,0.1); /* קו דק לאורך כל הדף */
+  padding-top: 10px;
+}
+
+.footer-logo img {
+  max-width: 80px;
+  height: auto;
+  opacity: 0.95;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+  color: #ffffff;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .footer-line {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  div.image-card {
+    flex: 1 1 100%; /* Each card takes full width on small screens */
+    margin-bottom: 20px; /* Space between stacked cards */
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-line {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-nav {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .hero-menu {
+    flex-direction: column; /* Stack menu items vertically */
+    gap: 10px; /* Adjust spacing between menu items */
+    width: 100%; /* Full width for menu items */
+  }
+
+  .hero-menu li {
+    width: 100%; /* Each menu item takes full width */
+  }
+
+  .hero-logo {
+    margin-bottom: 10px; /* Space between logo and menu */
+  }
+}
+
+
+#cabins{
+  margin: 100px;
+  margin-top: 250px;
+  margin-bottom: 150px;
+  bottom: 0;
+}
+
+
